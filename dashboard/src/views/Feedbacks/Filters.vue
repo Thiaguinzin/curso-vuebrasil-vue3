@@ -29,9 +29,9 @@
     </ul>
   </div>
 </template>
-
 <script>
-import { reactive } from 'vue'
+
+import {reactive} from 'vue'
 import services from '../../services'
 import useStore from '../../hooks/useStore'
 
@@ -49,15 +49,17 @@ const COLORS = {
   other: { text: 'text-brand-graydark', bg: 'bg-brand-graydark' }
 }
 
-function applyFiltersStructure (summary) {
+function applyFiltersStructure(summary) {
+  debugger
   return Object.keys(summary).reduce((acc, cur) => {
+
     const currentFilter = {
       label: LABELS[cur],
       color: COLORS[cur],
       amount: summary[cur]
     }
 
-    if (cur === 'all') {
+    if (cur === "all") {
       currentFilter.active = true
     } else {
       currentFilter.type = cur
@@ -68,42 +70,45 @@ function applyFiltersStructure (summary) {
 }
 
 export default {
-  async setup (_, { emit }) {
+
+  async setup(props, {emit}) {
+
     const store = useStore('Global')
     const state = reactive({
-      hasError: false,
       filters: [
-        { label: null, amount: null }
+        {label: null, color: null, amount: null}
       ]
     })
 
     try {
       const { data } = await services.feedbacks.getSummary()
-      state.filters = applyFiltersStructure(data)
+      state.filters = applyFiltersStructure(data);
     } catch (error) {
       state.hasError = !!error
-      state.filters = applyFiltersStructure({ all: 0, issue: 0, idea: 0, other: 0 })
+      applyFiltersStructure({all: 0, issue: 0, idea: 0, other: 0});
     }
 
-    function handleSelect ({ type }) {
-      if (store.isLoading) {
+    function handleSelect({type}) {
+      if(store.isLoading) {
         return
       }
 
       state.filters = state.filters.map((filter) => {
         if (filter.type === type) {
-          return { ...filter, active: true }
+          return {...filter, active: true}
         }
-        return { ...filter, active: false }
+        return {...filter, active: false}
       })
-
       emit('select', type)
     }
 
+
     return {
       state,
-      handleSelect
+      handleSelect,
+      applyFiltersStructure
     }
   }
+
 }
 </script>

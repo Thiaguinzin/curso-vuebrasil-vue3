@@ -3,6 +3,6 @@ import UserModule from './user'
 import GlobalModule from './global'
 
 export default readonly({
-  User: UserModule,
+  User:UserModule,
   Global: GlobalModule
 })

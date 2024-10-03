@@ -4,17 +4,22 @@ const defaultPagination = {
 }
 
 export default httpClient => ({
-  getAll: async ({ type, limit, offset } = defaultPagination) => {
-    const query = { limit, offset }
+
+  getAll: async ({type, limit, offset} = defaultPagination) => {
+    const query = {limit, offset}
     if (type) {
-      query.type = type
+      query.type = type;
     }
-    const response = await httpClient.get('/feedbacks', { params: query })
+
+    const response = await httpClient.get('/feedbacks', {params: query})
 
     return { data: response.data }
+
   },
+
   getSummary: async () => {
-    const response = await httpClient.get('/feedbacks/summary')
+    const response = await httpClient.get('/feedbacks/summary/')
     return { data: response.data }
   }
+
 })

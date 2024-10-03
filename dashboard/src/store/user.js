@@ -1,26 +1,26 @@
-import { reactive } from 'vue'
+import { current } from "tailwindcss/colors";
+import { reactive } from "vue";
 
 const userInitialState = {
   currentUser: {}
 }
 
-let state = reactive(userInitialState)
-
+let state= reactive(userInitialState)
 export default state
 
-export function resetUserStore () {
+export function resetUserStore() {
   state = reactive(userInitialState)
 }
 
-export function cleanCurrentUser () {
+export function clearCurrentUser() {
   state.currentUser = {}
 }
 
-export function setCurrentUser (user) {
-  state.currentUser = user
+export function setCurrentUser(user) {
+  state.currentUser = user;
 }
 
 export function setApiKey (apiKey) {
-  const currentUser = { ...state.currentUser, apiKey }
-  state.currentUser = currentUser
+  const currentUser = {...state.currentUser, apiKey}
+  state.currentUser = currentUser;
 }

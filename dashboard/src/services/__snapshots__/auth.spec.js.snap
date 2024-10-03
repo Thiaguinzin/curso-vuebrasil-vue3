@@ -2,20 +2,14 @@
 
 exports[`AuthService should return a token when user login 1`] = `
 Object {
-  "data": Object {
-    "token": "123.123.123",
-  },
-  "errors": null,
+  "token": "123.123.123",
 }
 `;
 
 exports[`AuthService should return an user when user register 1`] = `
 Object {
-  "data": Object {
-    "email": "igor@igor.me",
-    "name": "Igor",
-    "password": "123",
-  },
-  "errors": null,
+  "email": "igor@igor.me",
+  "name": "Igor",
+  "password": "123",
 }
 `;

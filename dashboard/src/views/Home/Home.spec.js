@@ -1,8 +1,7 @@
 import Home from '.'
-import { shallowMount } from '@vue/test-utils'
 import { routes } from '../../router'
-
 import { createRouter, createWebHistory } from 'vue-router'
+import { shallowMount } from '@vue/test-utils'
 
 const router = createRouter({
   history: createWebHistory('/'),
@@ -20,5 +19,6 @@ describe('<Home />', () => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+
   })
 })
